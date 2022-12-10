@@ -2,8 +2,8 @@ from pydantic import BaseSettings
 
 
 class Config(BaseSettings):
-    token: str = ""
-    dataBaseURL: str = ""
+    TOKEN: str = ""
+    DATABASE_URL: str = ""
 
     class Config:
         case_sensitive = True

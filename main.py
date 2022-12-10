@@ -19,7 +19,7 @@ class TelegramBot:
 
         self.loop = asyncio.get_event_loop()
 
-        self.bot = Bot(token=self.config.get('token'))
+        self.bot = Bot(token=self.config.get('TOKEN'))
         self.dp = Dispatcher(bot=self.bot, storage=MemoryStorage())
 
     async def on_startup(self, dp: Dispatcher):
