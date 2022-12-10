@@ -5,8 +5,6 @@ from aiogram.utils.exceptions import BotBlocked, ChatNotFound, UserDeactivated, 
 
 from classes.Modules import Modules
 
-from database.users import user_crud, UserUpdate
-
 
 class Errors(Modules):
     def __init__(self, dp, loop):
@@ -14,18 +12,15 @@ class Errors(Modules):
         self.logging = logging.getLogger('modules.Error')
 
     async def error_BotBlocked(self, update: types.Update, exception: BotBlocked):
-        await user_crud.update_user(update.message.from_user.id, UserUpdate(active=False))
-        self.logging.error(f"{exception}")
+        self.logging.error(f"{exception} - BotBlocked - {update}")
         return True
 
     async def error_ChatNotFound(self, update: types.Update, exception: ChatNotFound):
-        await user_crud.delete_user(update.message.from_user.id)
-        self.logging.error(f"{exception}")
+        self.logging.error(f"{exception} - ChatNotFound - {update}")
         return True
 
     async def error_UserDeactivated(self, update: types.Update, exception: UserDeactivated):
-        await user_crud.delete_user(update.message.from_user.id)
-        self.logging.error(f"{exception}")
+        self.logging.error(f"{exception} - UserDeactivated - {update}")
         return True
 
     async def error_TelegramAPIError(self, update: types.Update, exception: TelegramAPIError):

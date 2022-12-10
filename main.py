@@ -24,7 +24,7 @@ class TelegramBot:
 
     async def on_startup(self, dp: Dispatcher):
         self.LoadingFilters.load_filters(dp)
-        self.LoadingModule.load_modules(dp, self.loop)
+        self.LoadingModule.load_modules(dp)
 
     def run(self):
         executor.start_polling(self.dp, loop=self.loop, skip_updates=True, on_startup=self.on_startup)

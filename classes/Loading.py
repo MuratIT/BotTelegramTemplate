@@ -27,10 +27,10 @@ class LoadingModule(LoadingClasses):
             folder = 'modules'
         super(LoadingModule, self).__init__(folder)
 
-    def load_modules(self, dp, loop):
+    def load_modules(self, dp):
         self.load_classes()
         for class_ in self.list:
-            classes = class_(dp, loop)
+            classes = class_(dp)
 
             if 'register_handlers' in dir(classes):
                 classes.register_handlers()
