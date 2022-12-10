@@ -18,14 +18,4 @@ To work with files from a folder with filters, see also the example in a one-dim
 All development is carried out using the [aiogram](https://github.com/aiogram/aiogram) library
 
 
-
-## Environment Variables
-
-To run this project, you will need to add the following environment variables
-
-`token`
-
-`dataBaseURL`
-
-
 # READMI in development...
