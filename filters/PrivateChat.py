@@ -12,11 +12,11 @@ class PrivateChat(BoundFilter):
         if self.chat_private:
             if isinstance(message, types.Message):
                 if message.chat.type == 'private':
-                    return True
-                return False
+                    return self.chat_private
+                return not self.chat_private
             elif isinstance(message, types.CallbackQuery):
                 if message.message.chat.type == 'private':
-                    return True
-                return False
-            return False
-        return True
+                    return self.chat_private
+                return not self.chat_private
+            return not self.chat_private
+        return self.chat_private
