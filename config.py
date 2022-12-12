@@ -3,9 +3,9 @@ from pydantic import BaseSettings
 
 class Config(BaseSettings):
     TOKEN: str
-    WEBHOOK_URL_PATH: str
-    WEBHOOK_SSL_CERT: str
-    WEBHOOK_SSL_PRIV: str
+    WEBHOOK_URL_PATH: str = None
+    WEBHOOK_SSL_CERT: str = None
+    WEBHOOK_SSL_PRIV: str = None
 
     SECRET: str
 
