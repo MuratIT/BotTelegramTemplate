@@ -13,13 +13,13 @@ class TelegramBot:
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
 
-        self.config = Config().dict()
+        self.config = Config()
         self.LoadingModule = LoadingModule()
         self.LoadingFilters = LoadingFilters()
 
         self.loop = asyncio.get_event_loop()
 
-        self.bot = Bot(token=self.config.get('TOKEN'))
+        self.bot = Bot(token=self.config.TOKEN)
         self.dp = Dispatcher(bot=self.bot, storage=MemoryStorage())
 
     async def on_startup(self, dp: Dispatcher):

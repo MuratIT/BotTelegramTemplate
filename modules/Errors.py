@@ -7,8 +7,8 @@ from classes.Modules import Modules
 
 
 class Errors(Modules):
-    def __init__(self, dp, loop):
-        super(Errors, self).__init__(dp, loop)
+    def __init__(self, dp):
+        super(Errors, self).__init__(dp)
         self.logging = logging.getLogger('modules.Error')
 
     async def error_BotBlocked(self, update: types.Update, exception: BotBlocked):
