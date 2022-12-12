@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:13.3
+    restart: always
+    env_file: .env
+    expose:
+      - "${POSTGRES_PORT}"
+  telegram_bot:
+    build: .
+    depends_on:
+      - db
+    restart: always
+    env_file: .env
+    command: bash -c "alembic revision --autogenerate -m 'db' && alembic upgrade head && python main.py"
+    ports:
+      - "443:443"
+    expose:
+      - "443"
