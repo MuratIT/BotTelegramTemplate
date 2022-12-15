@@ -15,3 +15,15 @@ services:
     command: bash -c "alembic upgrade head && python run_bot.py"
     expose:
       - "49151"
+  nginx:
+    image: nginx:1.23.3
+    container_name: production_nginx
+    depends_on:
+      - telegram_bot
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./webhook_cert.pem:/etc/nginx/webhook_cert.pem
+      - ./webhook_pkey.pem:/etc/nginx/webhook_pkey.pem
+    ports:
+      - "80:80"
+      - "443:443"
