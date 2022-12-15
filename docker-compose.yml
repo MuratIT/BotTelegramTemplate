@@ -12,8 +12,6 @@ services:
       - db
     restart: always
     env_file: .env
-    command: bash -c "alembic revision --autogenerate -m 'db' && alembic upgrade head && python main.py"
-    ports:
-      - "443:443"
+    command: bash -c "alembic upgrade head && python run_bot.py"
     expose:
-      - "443"
+      - "49151"
