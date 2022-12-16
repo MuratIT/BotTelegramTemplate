@@ -30,7 +30,7 @@ class TelegramBotWebhook(TelegramBot):
     def start_webhook(self):
         start_webhook(
             dispatcher=self.dp,
-            webhook_path='/',
+            webhook_path=f'/{self.config.TOKEN}',
             on_startup=self.on_startup_webhook,
             on_shutdown=self.on_shutdown_webhook,
             skip_updates=self.config.SKIP_UPDATES,
