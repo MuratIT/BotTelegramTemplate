@@ -12,7 +12,7 @@ services:
       - db
     restart: always
     env_file: .env
-    command: bash -c "alembic upgrade head && python run_bot.py"
+    command: bash -c "python run_bot.py check_db && alembic upgrade head && python run_bot.py"
     expose:
       - "49151"
   nginx:
