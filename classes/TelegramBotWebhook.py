@@ -7,6 +7,7 @@ from .TelegramBot import TelegramBot
 class TelegramBotWebhook(TelegramBot):
     def __init__(self):
         super(TelegramBotWebhook, self).__init__()
+        self.__url = f"https://{self.config.WEBHOOK_URL}/{self.config.TOKEN}"
 
     def certificate(self):
         if self.config.WEBHOOK_SSL_CERT:
@@ -19,7 +20,7 @@ class TelegramBotWebhook(TelegramBot):
             if not webhook.url:
                 await self.bot.delete_webhook()
 
-            await self.bot.set_webhook(self.config.WEBHOOK_URL, certificate=self.certificate())
+            await self.bot.set_webhook(self.__url, certificate=self.certificate())
         await self.on_startup(self.dp)
 
     async def on_shutdown_webhook(self, dp: Dispatcher):
