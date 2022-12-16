@@ -12,8 +12,18 @@ services:
       - db
     restart: always
     env_file: .env
-    command: bash -c "alembic revision --autogenerate -m 'db' && alembic upgrade head && python main.py"
-    ports:
-      - "443:443"
+    command: bash -c "python run_bot.py check_db && alembic upgrade head && python run_bot.py"
     expose:
-      - "443"
+      - "49151"
+  nginx:
+    image: nginx:1.23.3
+    container_name: production_nginx
+    depends_on:
+      - telegram_bot
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./webhook_cert.pem:/etc/nginx/webhook_cert.pem
+      - ./webhook_pkey.pem:/etc/nginx/webhook_pkey.pem
+    ports:
+      - "80:80"
+      - "443:443"
