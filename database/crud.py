@@ -1,3 +1,5 @@
+from typing import Union
+
 from sqlalchemy import select
 
 from database.base import async_session_maker
@@ -7,6 +9,19 @@ class Crud:
     def __init__(self, model: any, data: dict = None):
         self.model = model
         self.data = data
+
+    async def read_by_field(self, field: str, value: Union[int, str]):
+        async with async_session_maker() as session:
+            column = getattr(self.model, field, None)
+            if column is None:
+                return None
+
+            select_data = select(self.model).where(column == value)
+
+            result = await session.execute(select_data)
+            model = result.scalars().first()
+
+            return model
 
     async def read_all(self):
         async with async_session_maker() as session:
