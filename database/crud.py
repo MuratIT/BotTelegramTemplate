@@ -31,11 +31,7 @@ class Crud:
             return model
 
     async def read_id(self, id: int):
-        async with async_session_maker() as session:
-            select_user = select(self.model).where(self.model.id == id)
-            result = await session.execute(select_user)
-            model = result.scalars().first()
-            return model
+        return await self.read_by_field('id', id)
 
     async def create(self):
         async with async_session_maker() as session:
@@ -59,6 +55,3 @@ class Crud:
             async with async_session_maker() as session:
                 await session.delete(model)
                 await session.commit()
-
-
-
